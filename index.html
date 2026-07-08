@@ -10,7 +10,7 @@
    margin: 0;
    background-color: #121214; 
    color: #e1e1e6;
-   padding-bottom: 70px; 
+   padding-bottom: 80px; 
  }
 
  header {
@@ -76,6 +76,7 @@
    font-size: 0.75rem;
    gap: 4px;
    width: 25%;
+   cursor: pointer;
    transition: color 0.2s;
  }
  .nav-item:hover, .nav-item.active {
@@ -85,13 +86,19 @@
    fill: currentColor;
  }
 
- .content {
+ /* CSS untuk Tab Spa */
+ .tab-content {
+   display: none;
    max-width: 800px;
    margin: 0 auto;
    padding: 20px;
    box-sizing: border-box;
  }
- h2#judul {
+ .tab-content.active {
+   display: block;
+ }
+
+ h2.judul-section {
    color: #00b4d8;
    margin-top: 10px;
  }
@@ -171,7 +178,76 @@
  .svg-container h3 {
    color: #00b4d8;
  }
+
+ /* CSS untuk Grid Komik Custom */
+ .comic-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+   gap: 15px;
+   margin-top: 20px;
+ }
+ .comic-card {
+   background-color: #1a1a1e;
+   border-radius: 6px;
+   overflow: hidden;
+   border: 1px solid #2a2a30;
+   transition: transform 0.2s;
+ }
+ .comic-card:hover {
+   transform: translateY(-4px);
+ }
  
+ /* CSS ANTI GEPENG UNTUK FOTO/COVER KOMIK */
+ .comic-thumbnail-img {
+   width: 100%;
+   height: 200px;
+   object-fit: cover; /* Membuat foto terpotong rapi & proporsional, anti penyet/gepeng */
+   object-position: center;
+   background-color: #2a2a30;
+   display: block;
+ }
+ 
+ .comic-info {
+   padding: 10px;
+ }
+ .comic-title {
+   font-size: 0.9rem;
+   font-weight: bold;
+   margin: 0 0 5px 0;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+ }
+ .comic-meta {
+   font-size: 0.75rem;
+   color: #00b4d8;
+ }
+
+ /* Search Bar Overlay */
+ .search-container {
+   display: none;
+   background: #1a1a1e;
+   padding: 15px;
+   border-bottom: 2px solid #0096c7;
+ }
+ .search-container.active {
+   display: block;
+ }
+ .search-box {
+   display: flex;
+   max-width: 800px;
+   margin: 0 auto;
+   gap: 10px;
+ }
+ .search-box input {
+   flex: 1;
+   padding: 10px;
+   background: #2a2a30;
+   border: 1px solid #3a3a42;
+   color: white;
+   border-radius: 4px;
+ }
+
  footer {
    background: #0b0b0c;
    color: #777;
@@ -190,20 +266,29 @@
     <h1>Heavenly Grand Archives</h1>
   </div>
   <div class="header-actions">
-    <button class="icon-btn" aria-label="Cari">
+    <button class="icon-btn" aria-label="Cari" id="btn-cari">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </button>
-    <button class="icon-btn" aria-label="Notifikasi">
+    <button class="icon-btn" aria-label="Notifikasi" id="btn-notif">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
     </button>
-    <button class="icon-btn" aria-label="Profil">
+    <button class="icon-btn" aria-label="Profil" id="btn-profil">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
     </button>
   </div>
 </header>
 
-<div class="content">
-  <h2 id="judul">About us</h2>
+<!-- Bagian Search Input -->
+<div class="search-container" id="search-section">
+  <div class="search-box">
+    <input type="text" placeholder="Ketik judul manhwa/manga yang ingin dicari...">
+    <button class="icon-btn" style="background:#0096c7; border-radius:4px; width:auto; padding:0 15px;">Cari</button>
+  </div>
+</div>
+
+<!-- ==================== TAB 1: HOME ==================== -->
+<div class="tab-content active" id="content-home">
+  <h2 class="judul-section">About us</h2>
   <p>
     Heavenly Grand Archives adalah perpustakaan ilahi tempat kamu bisa menjelajahi dunia Manhwa, Manga, dan Manhua terupdate. Kami hadir untuk memberikan pengalaman membaca komik yang cepat, responsif, dan nyaman untuk semua kalangan pembaca. Temukan petualangan serumu di sini setiap hari!
   </p>
@@ -226,7 +311,7 @@
 
   <div class="formulir">
     <h3>Hubungi Kami / Lapor Error</h3>
-    <form>
+    <form onsubmit="event.preventDefault(); alert('Laporan Anda berhasil dikirim ke arsip surgawi!');">
       <label for="username">Nama / Username:</label>
       <input type="text" id="username" placeholder="Masukkan nama kamu">
       
@@ -255,7 +340,6 @@
         <line x1="45" y1="95" x2="85" y2="98" />
         <line x1="45" y1="115" x2="85" y2="118" />
       </g>
-      
       <g stroke="#00b4d8" stroke-width="4" stroke-linecap="round">
         <line x1="115" y1="78" x2="155" y2="75" />
         <line x1="115" y1="98" x2="155" y2="95" />
@@ -265,45 +349,171 @@
   </div>
 </div>
 
+<!-- ==================== TAB 2: EXPLORE ==================== -->
+<div class="tab-content" id="content-explore">
+  <h2 class="judul-section">Explore Genres & Recommendations</h2>
+  <p>Cari komik pilihan berdasarkan rekomendasi sesepuh kultivasi dan algoritma surgawi.</p>
+  
+  <div class="info-box" style="border-left-color: #e63946;">
+    <h3>🔥 Sedang Populer Minggu Ini</h3>
+    <div class="comic-grid">
+      <div class="comic-card">
+        <!-- MASUKKAN LINK COVER RETURN OF THE MOUNT HUA SECT DI BAWAH -->
+        <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Return of the Mount Hua Sect" class="comic-thumbnail-img">
+        <div class="comic-info">
+          <p class="comic-title">Return of the Mount Hua Sect</p>
+          <span class="comic-meta">Ch. 142 • Cultivation</span>
+        </div>
+      </div>
+      <div class="comic-card">
+        <!-- MASUKKAN LINK COVER SOLO LEVELING RAGNAROK DI BAWAH -->
+        <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Solo Leveling: Ragnarok" class="comic-thumbnail-img">
+        <div class="comic-info">
+          <p class="comic-title">Solo Leveling: Ragnarok</p>
+          <span class="comic-meta">Ch. 35 • Action Fantasy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 3: LIBRARY ==================== -->
+<div class="tab-content" id="content-library">
+  <h2 class="judul-section">Library Saya</h2>
+  <p>Daftar komik yang sedang kamu ikuti (Bookmark) atau riwayat terakhir dibaca.</p>
+  
+  <div class="comic-grid">
+    <div class="comic-card">
+      <!-- MASUKKAN LINK COVER THE GREATEST ESTATE DEVELOPER DI BAWAH -->
+      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="The Greatest Estate Developer" class="comic-thumbnail-img">
+      <div class="comic-info">
+        <p class="comic-title">The Greatest Estate Developer</p>
+        <span class="comic-meta">Lanjut Baca Ch. 150</span>
+      </div>
+    </div>
+    <div class="comic-card">
+      <!-- MASUKKAN LINK COVER MAGIC EMPEROR DI BAWAH -->
+      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Magic Emperor" class="comic-thumbnail-img">
+      <div class="comic-info">
+        <p class="comic-title">Magic Emperor</p>
+        <span class="comic-meta">Lanjut Baca Ch. 510</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 4: ALL SERIES ==================== -->
+<div class="tab-content" id="content-allseries">
+  <h2 class="judul-section">Semua Koleksi Komik</h2>
+  <p>Menampilkan semua daftar komik dari database Heavenly Grand Archives secara urut abjad.</p>
+  
+  <div class="comic-grid">
+    <div class="comic-card">
+      <!-- MASUKKAN LINK COVER NANO MACHINE DI BAWAH -->
+      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Nano Machine" class="comic-thumbnail-img">
+      <div class="comic-info">
+        <p class="comic-title">Nano Machine</p>
+        <span class="comic-meta">Ch. 230</span>
+      </div>
+    </div>
+    <div class="comic-card">
+      <!-- MASUKKAN LINK COVER OMNISCIENT READER DI BAWAH -->
+      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Omniscient Reader" class="comic-thumbnail-img">
+      <div class="comic-info">
+        <p class="comic-title">Omniscient Reader's Viewpoint</p>
+        <span class="comic-meta">Ch. 215</span>
+      </div>
+    </div>
+    <div class="comic-card">
+      <!-- MASUKKAN LINK COVER APEX FUTURE DI BAWAH -->
+      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Apex Future" class="comic-thumbnail-img">
+      <div class="comic-info">
+        <p class="comic-title">Liveling In The Future</p>
+        <span class="comic-meta">Ch. 334</span>
+      </div>
+    </div>
+    <div class="comic-card">
+      <!-- MASUKKAN LINK COVER MARTIAL PEAK DI BAWAH -->
+      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Martial Peak" class="comic-thumbnail-img">
+      <div class="comic-info">
+        <p class="comic-title">Martial Peak</p>
+        <span class="comic-meta">Ch. 3600</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB TAMBAHAN: PROFIL ==================== -->
+<div class="tab-content" id="content-profil">
+  <h2 class="judul-section">Profil Pembaca</h2>
+  <div class="info-box">
+    <h3>Arsip Pendekar</h3>
+    <p><strong>Nama Pendekar:</strong> Aji Van Sanders (Guest)</p>
+    <p><strong>Tingkatan Ranah:</strong> Heaven Trampling Realm </p>
+    <p><strong>Total Komik Dibaca:</strong> 99999 Judul</p>
+    <hr style="border: 0; border-top: 1px solid #3a3a42; margin: 15px 0;">
+    <button class="formulir" style="margin:0; width:auto; padding: 10px 15px; background:#e63946; color:white; border:none; border-radius:4px; cursor:pointer;">Masuk / Registrasi Akun</button>
+  </div>
+</div>
+
 <footer>
   Copyright © 2026 Heavenly Grand Archives
 </footer>
 
 <div class="bottom-nav">
-  <a href="#Home" class="nav-item active">
+  <div class="nav-item active" data-target="content-home">
     <svg width="20" height="20" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
     <span>Home</span>
-  </a>
-  <a href="#Explore" class="nav-item">
+  </div>
+  <div class="nav-item" data-target="content-explore">
     <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L11 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
     <span>Explore</span>
-  </a>
-  <a href="Library.html" class="nav-item">
+  </div>
+  <div class="nav-item" data-target="content-library">
     <svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
     <span>Library</span>
-  </a>
-  <a href="#All series" class="nav-item">
+  </div>
+  <div class="nav-item" data-target="content-allseries">
     <svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
     <span>All Series</span>
-  </a>
+  </div>
 </div>
 
 <script>
   const navItems = document.querySelectorAll('.nav-item');
+  const tabs = document.querySelectorAll('.tab-content');
+
   navItems.forEach(item => {
     item.addEventListener('click', function() {
-      const activeItem = document.querySelector('.nav-item.active');
-      if (activeItem) activeItem.classList.remove('active');
+      document.querySelector('.nav-item.active').classList.remove('active');
       this.classList.add('active');
+
+      const targetId = this.getAttribute('data-target');
+      
+      tabs.forEach(tab => tab.classList.remove('active'));
+      document.getElementById(targetId).classList.add('active');
+      
+      document.getElementById('search-section').classList.remove('active');
     });
   });
 
-  const tombolAksi = document.querySelectorAll('.icon-btn');
-  tombolAksi.forEach(tombol => {
-    tombol.addEventListener('click', function() {
-      const tipeAksi = this.getAttribute('aria-label');
-      alert('Fitur ' + tipeAksi + ' sedang dikembangkan!');
-    });
+  const btnCari = document.getElementById('btn-cari');
+  const searchSection = document.getElementById('search-section');
+  const btnProfil = document.getElementById('btn-profil');
+  const btnNotif = document.getElementById('btn-notif');
+
+  btnCari.addEventListener('click', function() {
+    searchSection.classList.toggle('active');
+  });
+
+  btnProfil.addEventListener('click', function() {
+    tabs.forEach(tab => tab.classList.remove('active'));
+    document.getElementById('content-profil').classList.add('active');
+    document.querySelector('.nav-item.active').classList.remove('active');
+  });
+
+  btnNotif.addEventListener('click', function() {
+    alert('Kotak Masuk: Kamu belum memiliki notifikasi pembaruan chapter baru.');
   });
 </script>
 
