@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Heavenly Grand Archives</title>
+ <title>Heavenly Grand Archives - Shop</title>
  <style>
  body {
    font-family: 'Segoe UI', Arial, sans-serif;
@@ -30,11 +30,11 @@
    font-size: 1.25rem;
    font-weight: bold;
    letter-spacing: 0.5px;
-   text-transform: capitalize;
  }
  .header-actions {
    display: flex;
    gap: 12px;
+   align-items: center;
  }
 
  .icon-btn {
@@ -49,9 +49,25 @@
    align-items: center;
    justify-content: center;
    transition: background 0.2s;
+   position: relative;
  }
  .icon-btn:hover {
    background: rgba(255, 255, 255, 0.25);
+ }
+ .badge {
+   position: absolute;
+   top: -2px;
+   right: -2px;
+   background-color: #e63946;
+   color: white;
+   font-size: 0.65rem;
+   font-weight: bold;
+   border-radius: 50%;
+   width: 18px;
+   height: 18px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
  }
 
  .bottom-nav {
@@ -86,12 +102,11 @@
    fill: currentColor;
  }
 
- /* CSS untuk Tab Spa */
  .tab-content {
    display: none;
    max-width: 800px;
    margin: 0 auto;
-   padding: 20px;
+   padding: 15px;
    box-sizing: border-box;
  }
  .tab-content.active {
@@ -100,152 +115,277 @@
 
  h2.judul-section {
    color: #00b4d8;
-   margin-top: 10px;
- }
- .highlight {
-   color: #fff;
-   font-weight: bold;
-   background-color: #e63946;
-   padding: 3px 8px;
-   border-radius: 4px;
- }
- 
- .info-box {
-   background-color: #1a1a1e;
-   border-left: 5px solid #00b4d8;
-   padding: 15px;
    margin-top: 20px;
-   border-radius: 4px;
-   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
- }
- .info-box h3 {
-   margin-top: 0;
-   color: #00b4d8;
+   margin-bottom: 15px;
+   font-size: 1.2rem;
+   border-left: 4px solid #00b4d8;
+   padding-left: 8px;
  }
 
- .formulir {
-   margin-top: 25px;
-   background: #1a1a1e;
-   border: 1px solid #2a2a30;
-   padding: 20px;
+ .promo-banner {
+   width: 100%;
+   height: 150px;
+   background: linear-gradient(rgba(0,0,0,0.4), rgba(18,18,20,1)), url('https://images.placeholders.dev/?width=800&height=400&text=SPECIAL+MERCHANDISE+SALE&background=%230077b6&color=%23ffffff') no-repeat center;
+   background-size: cover;
    border-radius: 8px;
-   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
- }
- .formulir h3 {
-   margin-top: 0;
-   color: #00b4d8;
- }
- .formulir label {
-   font-weight: bold;
-   display: block;
-   margin-bottom: 5px;
-   color: #90e0ef;
- }
- .formulir input[type="text"], .formulir select {
-   width: 100%;
-   padding: 10px;
-   margin-bottom: 15px;
-   background-color: #2a2a30;
-   border: 1px solid #3a3a42;
-   border-radius: 4px;
-   color: white;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   padding: 15px;
    box-sizing: border-box;
+   margin-bottom: 20px;
  }
- .formulir input[type="text"]::placeholder {
-   color: #777;
+ .promo-banner h2 {
+   margin: 0;
+   color: #fff;
+   font-size: 1.2rem;
  }
- 
- .formulir input[type="submit"] {
-   background-color: #0096c7;
-   color: white;
-   border: none;
-   padding: 12px 20px;
+ .promo-banner p {
+   margin: 5px 0 0 0;
+   color: #90e0ef;
+   font-size: 0.85rem;
+ }
+
+ .product-page {
+   display: none;
+ }
+ .product-page.active {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+   gap: 15px;
+ }
+ .product-card {
+   background-color: #1a1a1e;
+   border-radius: 8px;
+   overflow: hidden;
+   border: 1px solid #2a2a30;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   transition: transform 0.2s;
+ }
+ .product-card:hover {
+   transform: translateY(-4px);
+ }
+ .product-img {
    width: 100%;
+   height: 140px;
+   object-fit: cover;
+   background-color: #2a2a30;
+ }
+ .product-info {
+   padding: 10px;
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+ }
+ .product-title {
+   font-size: 0.8rem;
+   font-weight: bold;
+   margin: 0 0 5px 0;
+   color: #e1e1e6;
+   line-height: 1.2;
+ }
+ .product-price {
+   color: #00b4d8;
+   font-weight: bold;
+   font-size: 0.9rem;
+   margin: 0 0 8px 0;
+ }
+ .product-rating {
+   font-size: 0.7rem;
+   color: #ffb703;
+   margin-bottom: 8px;
+ }
+
+ .action-buttons {
+   display: flex;
+   flex-direction: column;
+   gap: 6px;
+ }
+ .btn-cart {
+   background-color: #1a1a1e;
+   border: 1px solid #0096c7;
+   color: #00b4d8;
+   padding: 6px;
    border-radius: 4px;
    cursor: pointer;
    font-weight: bold;
-   font-size: 1rem;
-   transition: background 0.3s;
+   font-size: 0.75rem;
+   width: 100%;
+   transition: background 0.2s;
  }
- .formulir input[type="submit"]:hover {
-   background-color: #0077b6;
+ .btn-cart:hover {
+   background-color: #0096c7;
+   color: white;
  }
- 
- .svg-container {
-   text-align: center;
-   margin: 30px 0;
+ .btn-buy-now {
+   background-color: #e63946;
+   color: white;
+   border: none;
+   padding: 7px;
+   border-radius: 4px;
+   cursor: pointer;
+   font-weight: bold;
+   font-size: 0.75rem;
+   width: 100%;
+   transition: background 0.2s;
  }
- .svg-container h3 {
-   color: #00b4d8;
+ .btn-buy-now:hover {
+   background-color: #d62839;
  }
 
- /* CSS untuk Grid Komik Custom */
- .comic-grid {
-   display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-   gap: 15px;
+ .pagination-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 8px;
    margin-top: 20px;
  }
- .comic-card {
-   background-color: #1a1a1e;
-   border-radius: 6px;
-   overflow: hidden;
-   border: 1px solid #2a2a30;
-   transition: transform 0.2s;
- }
- .comic-card:hover {
-   transform: translateY(-4px);
- }
- 
- /* CSS ANTI GEPENG UNTUK FOTO/COVER KOMIK */
- .comic-thumbnail-img {
-   width: 100%;
-   height: 200px;
-   object-fit: cover; /* Membuat foto terpotong rapi & proporsional, anti penyet/gepeng */
-   object-position: center;
-   background-color: #2a2a30;
-   display: block;
- }
- 
- .comic-info {
-   padding: 10px;
- }
- .comic-title {
-   font-size: 0.9rem;
-   font-weight: bold;
-   margin: 0 0 5px 0;
-   white-space: nowrap;
-   overflow: hidden;
-   text-overflow: ellipsis;
- }
- .comic-meta {
-   font-size: 0.75rem;
+ .page-btn {
+   background: #1a1a1e;
+   border: 1px solid #00b4d8;
    color: #00b4d8;
+   padding: 6px 12px;
+   border-radius: 4px;
+   cursor: pointer;
+   font-weight: bold;
+   font-size: 0.85rem;
+   transition: all 0.2s;
+ }
+ .page-btn.active, .page-btn:hover {
+   background: #00b4d8;
+   color: #121214;
  }
 
- /* Search Bar Overlay */
- .search-container {
-   display: none;
+ .cart-list {
    background: #1a1a1e;
+   border-radius: 8px;
    padding: 15px;
-   border-bottom: 2px solid #0096c7;
+   border: 1px solid #2a2a30;
  }
- .search-container.active {
-   display: block;
- }
- .search-box {
+ .cart-item {
    display: flex;
-   max-width: 800px;
-   margin: 0 auto;
-   gap: 10px;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px 0;
+   border-bottom: 1px solid #2a2a30;
  }
- .search-box input {
-   flex: 1;
-   padding: 10px;
-   background: #2a2a30;
-   border: 1px solid #3a3a42;
+ .cart-item-detail {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+ }
+ .btn-remove {
+   background: #e63946;
    color: white;
+   border: none;
+   padding: 4px 8px;
    border-radius: 4px;
+   cursor: pointer;
+   font-size: 0.75rem;
+ }
+ .checkout-box {
+   margin-top: 20px;
+   text-align: right;
+ }
+ .total-price {
+   font-size: 1.2rem;
+   color: #00b4d8;
+   font-weight: bold;
+ }
+
+ .form-group {
+   margin-bottom: 15px;
+ }
+ .form-group label {
+   display: block;
+   font-size: 0.85rem;
+   color: #00b4d8;
+   margin-bottom: 5px;
+   font-weight: bold;
+ }
+ .form-control {
+   width: 100%;
+   padding: 10px;
+   background: #121214;
+   border: 1px solid #2a2a30;
+   border-radius: 4px;
+   color: #fff;
+   box-sizing: border-box;
+   font-size: 0.9rem;
+ }
+ .form-control:focus {
+   outline: none;
+   border-color: #00b4d8;
+ }
+
+ .modal-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.75);
+   backdrop-filter: blur(4px);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 2000;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.25s ease;
+ }
+ .modal-overlay.show {
+   opacity: 1;
+   pointer-events: auto;
+ }
+ .modal-box {
+   background: #1a1a1e;
+   border: 1px solid #00b4d8;
+   border-radius: 10px;
+   width: 85%;
+   max-width: 380px;
+   padding: 20px;
+   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+   text-align: center;
+   transform: scale(0.8);
+   transition: transform 0.25s ease;
+ }
+ .modal-overlay.show .modal-box {
+   transform: scale(1);
+ }
+ .modal-title {
+   color: #00b4d8;
+   font-size: 1.1rem;
+   font-weight: bold;
+   margin-top: 0;
+   margin-bottom: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+ }
+ .modal-text {
+   color: #e1e1e6;
+   font-size: 0.9rem;
+   line-height: 1.4;
+   margin-bottom: 20px;
+ }
+ .btn-modal {
+   background-color: #0096c7;
+   color: white;
+   border: none;
+   padding: 10px 24px;
+   border-radius: 5px;
+   cursor: pointer;
+   font-weight: bold;
+   font-size: 0.85rem;
+   transition: background 0.2s;
+ }
+ .btn-modal:hover {
+   background-color: #0077b6;
  }
 
  footer {
@@ -263,258 +403,392 @@
 
 <header>
   <div class="header-logo">
-    <h1>Heavenly Grand Archives</h1>
+    <h1>Heavenly Archives Shop</h1>
   </div>
   <div class="header-actions">
-    <button class="icon-btn" aria-label="Cari" id="btn-cari">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    </button>
-    <button class="icon-btn" aria-label="Notifikasi" id="btn-notif">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-    </button>
-    <button class="icon-btn" aria-label="Profil" id="btn-profil">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    <button class="icon-btn" aria-label="Keranjang" id="btn-cart-top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      <div class="badge" id="cart-count">0</div>
     </button>
   </div>
 </header>
 
-<!-- Bagian Search Input -->
-<div class="search-container" id="search-section">
-  <div class="search-box">
-    <input type="text" placeholder="Ketik judul manhwa/manga yang ingin dicari...">
-    <button class="icon-btn" style="background:#0096c7; border-radius:4px; width:auto; padding:0 15px;">Cari</button>
+<div class="tab-content active" id="content-shop">
+  <div class="promo-banner">
+    <span style="background:#e63946; padding:2px 6px; font-size:0.7rem; font-weight:bold; border-radius:3px; width:max-content; margin-bottom:5px;">DISKON 20%</span>
+    <h2>Merchandise Sekte Hwa Jong</h2>
+    <p>Dapatkan diskon khusus untuk pembelian Light Novel Vol. 1-5 minggu ini!</p>
+  </div>
+
+  <h2 class="judul-section">Koleksi Khusus Pendekar</h2>
+  
+  <div class="product-page active" id="page-1">
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Novel+Hwa+Jong&background=%232a2a30&color=%2390e0ef" alt="Novel" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Novel: Return of the Mount Hua Sect Vol.1</p>
+          <div class="product-rating">⭐ 4.9 (120)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 149.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Novel Mount Hua Vol. 1', 149000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Novel Mount Hua Vol. 1', 149000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Figure+Sung+Jinwoo&background=%232a2a30&color=%2390e0ef" alt="Figure" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Action Figure: Sung Jin-Woo (Monarch Ver.)</p>
+          <div class="product-rating">⭐ 5.0 (45)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 750.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Action Figure Jin-Woo', 750000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Action Figure Jin-Woo', 750000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Poster+Glow&background=%232a2a30&color=%2390e0ef" alt="Poster" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Premium Poster A3: Magic Emperor Glossy</p>
+          <div class="product-rating">⭐ 4.8 (88)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 45.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Poster A3 Magic Emperor', 45000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Poster A3 Magic Emperor', 45000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Keychain+Lloyd&background=%232a2a30&color=%2390e0ef" alt="Keychain" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Keychain Akrilik: Lloyd Frontera Ekspresi Jelek</p>
+          <div class="product-rating">⭐ 5.0 (310)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 25.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Keychain Lloyd Chibi', 25000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Keychain Lloyd Chibi', 25000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Jam+Dokja&background=%232a2a30&color=%2390e0ef" alt="Jam" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Omniscient Reader: Jam Saku Kim Dokja Replica</p>
+          <div class="product-rating">⭐ 4.9 (205)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 185.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Jam Saku Kim Dokja', 185000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Jam Saku Kim Dokja', 185000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-page" id="page-2">
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Kipas+Xie+Lian&background=%232a2a30&color=%2390e0ef" alt="Kipas" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Heaven Official's Blessing: Kipas Sutra Xie Lian</p>
+          <div class="product-rating">⭐ 5.0 (94)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 95.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Kipas Sutra Xie Lian', 95000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Kipas Sutra Xie Lian', 95000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Cincin+Nano&background=%232a2a30&color=%2390e0ef" alt="Cincin" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Nano Machine: Cincin Demonic Lord Titanium</p>
+          <div class="product-rating">⭐ 4.8 (150)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 65.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Cincin Nano Machine', 65000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Cincin Nano Machine', 65000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Deskmat+Murim&background=%232a2a30&color=%2390e0ef" alt="Deskmat" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Murim Login: Mousepad / Deskmat RGB Special</p>
+          <div class="product-rating">⭐ 4.7 (62)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 120.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Mousepad RGB Murim', 120000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Mousepad RGB Murim', 120000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Jubah+Northern+Blade&background=%232a2a30&color=%2390e0ef" alt="Jubah" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Legend of Northern Blade: Jubah Hitam Jin Mu-Won</p>
+          <div class="product-rating">⭐ 4.9 (78)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 230.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Jubah Jin Mu-Won', 230000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Jubah Jin Mu-Won', 230000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.placeholders.dev/?width=200&height=200&text=Pin+Tower+of+God&background=%232a2a30&color=%2390e0ef" alt="Pin Tog" class="product-img">
+      <div class="product-info">
+        <div>
+          <p class="product-title">Tower of God: Pin Logam Lambang Jahad</p>
+          <div class="product-rating">⭐ 4.6 (112)</div>
+        </div>
+        <div>
+          <p class="product-price">Rp 35.000</p>
+          <div class="action-buttons">
+            <button class="btn-cart" onclick="addToCart('Pin Logam Jahad', 35000)">+ Keranjang</button>
+            <button class="btn-buy-now" onclick="buyNow('Pin Logam Jahad', 35000)">Beli Langsung</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination-container">
+    <button class="page-btn active" onclick="switchSlide(1)" id="btn-slide-1">1</button>
+    <button class="page-btn" onclick="switchSlide(2)" id="btn-slide-2">2</button>
+  </div>
+
+</div>
+
+<div class="tab-content" id="content-cart">
+  <h2 class="judul-section">Keranjang Belanja Kamu</h2>
+  <div class="cart-list" id="cart-items-container">
+    <p style="color:#777; text-align:center;">Keranjangmu masih kosong. Silakan pilih merch surgawi di menu toko!</p>
+  </div>
+
+  <div class="checkout-box">
+    <p>Total Pembayaran: <span class="total-price" id="cart-total-price">Rp 0</span></p>
+    <button class="btn-buy-now" style="width: auto; padding: 12px 30px; font-size:1rem;" onclick="processCheckout()">Proses Pembayaran (Checkout)</button>
   </div>
 </div>
 
-<!-- ==================== TAB 1: HOME ==================== -->
-<div class="tab-content active" id="content-home">
-  <h2 class="judul-section">About us</h2>
-  <p>
-    Heavenly Grand Archives adalah perpustakaan ilahi tempat kamu bisa menjelajahi dunia Manhwa, Manga, dan Manhua terupdate. Kami hadir untuk memberikan pengalaman membaca komik yang cepat, responsif, dan nyaman untuk semua kalangan pembaca. Temukan petualangan serumu di sini setiap hari!
-  </p>
-  <p>
-    Di sini kamu bisa menjelajahi berbagai genre seru seperti 
-    <span class="highlight">Aksi & Kultivasi</span>, 
-    <span class="highlight">Fantasi & Isekai</span>, 
-    dan 
-    <span class="highlight">Romantis & Drama</span>.
-  </p>
+<div class="tab-content" id="content-profile">
+  <h2 class="judul-section">Data Profil & Pengiriman Pendekar</h2>
+  <div class="cart-list">
+    <form id="profile-form" onsubmit="saveProfile(event)">
+      <div class="form-group">
+        <label for="prof-name">Nama Penerima / Pendekar:</label>
+        <input type="text" id="prof-name" class="form-control" value="Aji Van Sanders" required>
+      </div>
 
-  <div class="info-box">
-    <h3>Informasi</h3>
-    <p>
-      <strong>Pemberitahuan:</strong> Sekarang kamu tidak perlu login atau 
-      membuat akun terlebih dahulu untuk membaca semua chapter komik yang ada 
-      di Heavenly Grand Archives. Gratis dan langsung baca!
-    </p>
-  </div>
+      <div class="form-group">
+        <label for="prof-address">Alamat Pengiriman Surgawi:</label>
+        <textarea id="prof-address" class="form-control" rows="3" required>Paviliun Sekte Hwa Jong, Lantai 3, Kamar Nomor 7, Area Pegunungan Surgawi.</textarea>
+      </div>
 
-  <div class="formulir">
-    <h3>Hubungi Kami / Lapor Error</h3>
-    <form onsubmit="event.preventDefault(); alert('Laporan Anda berhasil dikirim ke arsip surgawi!');">
-      <label for="username">Nama / Username:</label>
-      <input type="text" id="username" placeholder="Masukkan nama kamu">
-      
-      <label for="laporan">Jenis Laporan:</label>
-      <select id="laporan">
-        <option>Saran Judul Komik Baru</option>
-        <option>Lapor Chapter Rusak / Gambar Error</option>
-        <option>Kritik & Saran untuk Website</option>
-        <option>Tawaran Kerja Sama / Bisnis</option>
-      </select>
-      
-      <input type="submit" value="Kirim Laporan">
+      <div class="form-group">
+        <label for="prof-status">Status Tingkat Member:</label>
+        <select id="prof-status" class="form-control">
+          <option value="Outer Disciple">Outer Disciple (Basic)</option>
+          <option value="Inner Disciple">Inner Disciple (Medium)</option>
+          <option value="VIP Core Disciple" selected>VIP Core Disciple (Kasta Tinggi)</option>
+          <option value="Sect Elder">Sect Elder (Sultan)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-buy-now" style="background: #00b4d8; color: #121214; font-size: 0.9rem; padding: 10px;">Simpan Perubahan Profil</button>
     </form>
   </div>
-
-  <div class="svg-container">
-    <h3>Perpustakaan Surgawi (SVG)</h3>
-    <svg width="150" height="150" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="100" cy="160" rx="75" ry="10" fill="#d8f3dc" opacity="0.3" />
-      <path d="M 25 55 Q 100 68 100 58 Q 100 68 175 55 L 175 145 Q 100 158 100 148 Q 100 158 25 145 Z" fill="#0077b6" />
-      <path d="M 30 50 Q 100 62 100 52 L 100 142 Q 100 152 30 140 Z" fill="#f8f9fa" stroke="#00b4d8" stroke-width="2" />
-      <path d="M 170 50 Q 100 62 100 52 L 100 142 Q 100 152 170 140 Z" fill="#ffffff" stroke="#00b4d8" stroke-width="2" />
-      <path d="M 100 52 L 100 145" stroke="#0077b6" stroke-width="3" stroke-linecap="round" />
-      <g stroke="#00b4d8" stroke-width="4" stroke-linecap="round">
-        <line x1="45" y1="75" x2="85" y2="78" />
-        <line x1="45" y1="95" x2="85" y2="98" />
-        <line x1="45" y1="115" x2="85" y2="118" />
-      </g>
-      <g stroke="#00b4d8" stroke-width="4" stroke-linecap="round">
-        <line x1="115" y1="78" x2="155" y2="75" />
-        <line x1="115" y1="98" x2="155" y2="95" />
-        <line x1="115" y1="118" x2="155" y2="115" />
-      </g>
-    </svg>
-  </div>
 </div>
 
-<!-- ==================== TAB 2: EXPLORE ==================== -->
-<div class="tab-content" id="content-explore">
-  <h2 class="judul-section">Explore Genres & Recommendations</h2>
-  <p>Cari komik pilihan berdasarkan rekomendasi sesepuh kultivasi dan algoritma surgawi.</p>
-  
-  <div class="info-box" style="border-left-color: #e63946;">
-    <h3>🔥 Sedang Populer Minggu Ini</h3>
-    <div class="comic-grid">
-      <div class="comic-card">
-        <!-- MASUKKAN LINK COVER RETURN OF THE MOUNT HUA SECT DI BAWAH -->
-        <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Return of the Mount Hua Sect" class="comic-thumbnail-img">
-        <div class="comic-info">
-          <p class="comic-title">Return of the Mount Hua Sect</p>
-          <span class="comic-meta">Ch. 142 • Cultivation</span>
-        </div>
-      </div>
-      <div class="comic-card">
-        <!-- MASUKKAN LINK COVER SOLO LEVELING RAGNAROK DI BAWAH -->
-        <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Solo Leveling: Ragnarok" class="comic-thumbnail-img">
-        <div class="comic-info">
-          <p class="comic-title">Solo Leveling: Ragnarok</p>
-          <span class="comic-meta">Ch. 35 • Action Fantasy</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== TAB 3: LIBRARY ==================== -->
-<div class="tab-content" id="content-library">
-  <h2 class="judul-section">Library Saya</h2>
-  <p>Daftar komik yang sedang kamu ikuti (Bookmark) atau riwayat terakhir dibaca.</p>
-  
-  <div class="comic-grid">
-    <div class="comic-card">
-      <!-- MASUKKAN LINK COVER THE GREATEST ESTATE DEVELOPER DI BAWAH -->
-      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="The Greatest Estate Developer" class="comic-thumbnail-img">
-      <div class="comic-info">
-        <p class="comic-title">The Greatest Estate Developer</p>
-        <span class="comic-meta">Lanjut Baca Ch. 150</span>
-      </div>
-    </div>
-    <div class="comic-card">
-      <!-- MASUKKAN LINK COVER MAGIC EMPEROR DI BAWAH -->
-      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Magic Emperor" class="comic-thumbnail-img">
-      <div class="comic-info">
-        <p class="comic-title">Magic Emperor</p>
-        <span class="comic-meta">Lanjut Baca Ch. 510</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== TAB 4: ALL SERIES ==================== -->
-<div class="tab-content" id="content-allseries">
-  <h2 class="judul-section">Semua Koleksi Komik</h2>
-  <p>Menampilkan semua daftar komik dari database Heavenly Grand Archives secara urut abjad.</p>
-  
-  <div class="comic-grid">
-    <div class="comic-card">
-      <!-- MASUKKAN LINK COVER NANO MACHINE DI BAWAH -->
-      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Nano Machine" class="comic-thumbnail-img">
-      <div class="comic-info">
-        <p class="comic-title">Nano Machine</p>
-        <span class="comic-meta">Ch. 230</span>
-      </div>
-    </div>
-    <div class="comic-card">
-      <!-- MASUKKAN LINK COVER OMNISCIENT READER DI BAWAH -->
-      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Omniscient Reader" class="comic-thumbnail-img">
-      <div class="comic-info">
-        <p class="comic-title">Omniscient Reader's Viewpoint</p>
-        <span class="comic-meta">Ch. 215</span>
-      </div>
-    </div>
-    <div class="comic-card">
-      <!-- MASUKKAN LINK COVER APEX FUTURE DI BAWAH -->
-      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Apex Future" class="comic-thumbnail-img">
-      <div class="comic-info">
-        <p class="comic-title">Liveling In The Future</p>
-        <span class="comic-meta">Ch. 334</span>
-      </div>
-    </div>
-    <div class="comic-card">
-      <!-- MASUKKAN LINK COVER MARTIAL PEAK DI BAWAH -->
-      <img src="MASUKKAN_LINK_GAMBAR_DI_SINI" alt="Martial Peak" class="comic-thumbnail-img">
-      <div class="comic-info">
-        <p class="comic-title">Martial Peak</p>
-        <span class="comic-meta">Ch. 3600</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== TAB TAMBAHAN: PROFIL ==================== -->
-<div class="tab-content" id="content-profil">
-  <h2 class="judul-section">Profil Pembaca</h2>
-  <div class="info-box">
-    <h3>Arsip Pendekar</h3>
-    <p><strong>Nama Pendekar:</strong> Aji Van Sanders (Guest)</p>
-    <p><strong>Tingkatan Ranah:</strong> Heaven Trampling Realm </p>
-    <p><strong>Total Komik Dibaca:</strong> 99999 Judul</p>
-    <hr style="border: 0; border-top: 1px solid #3a3a42; margin: 15px 0;">
-    <button class="formulir" style="margin:0; width:auto; padding: 10px 15px; background:#e63946; color:white; border:none; border-radius:4px; cursor:pointer;">Masuk / Registrasi Akun</button>
+<div class="modal-overlay" id="custom-modal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#00b4d8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      Informasi Surgawi
+    </h3>
+    <p class="modal-text" id="modal-message">Pesan akan muncul di sini...</p>
+    <button class="btn-modal" onclick="closeModal()">Mengerti</button>
   </div>
 </div>
 
 <footer>
-  Copyright © 2026 Heavenly Grand Archives
+  Copyright © 2026 Heavenly Grand Archives E-Shop
 </footer>
 
 <div class="bottom-nav">
-  <div class="nav-item active" data-target="content-home">
-    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    <span>Home</span>
+  <div class="nav-item active" data-target="content-shop">
+    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
+    <span>Mulai Belanja</span>
   </div>
-  <div class="nav-item" data-target="content-explore">
-    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L11 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-    <span>Explore</span>
+  <div class="nav-item" data-target="content-cart" id="nav-cart-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+    <span>Keranjang</span>
   </div>
-  <div class="nav-item" data-target="content-library">
-    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
-    <span>Library</span>
-  </div>
-  <div class="nav-item" data-target="content-allseries">
-    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
-    <span>All Series</span>
+  <div class="nav-item" data-target="content-profile">
+    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+    <span>Alamat / Akun</span>
   </div>
 </div>
 
 <script>
+  let cart = [];
+
   const navItems = document.querySelectorAll('.nav-item');
   const tabs = document.querySelectorAll('.tab-content');
 
+  function showModal(msg) {
+    document.getElementById('modal-message').innerText = msg;
+    document.getElementById('custom-modal').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('custom-modal').classList.remove('show');
+  }
+
+  function changeTab(targetId) {
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    tabs.forEach(tab => tab.classList.remove('active'));
+
+    const targetTab = document.getElementById(targetId);
+    if(targetTab) targetTab.classList.add('active');
+
+    const matchingNav = document.querySelector(`[data-target="${targetId}"]`);
+    if(matchingNav) matchingNav.classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   navItems.forEach(item => {
     item.addEventListener('click', function() {
-      document.querySelector('.nav-item.active').classList.remove('active');
-      this.classList.add('active');
-
       const targetId = this.getAttribute('data-target');
-      
-      tabs.forEach(tab => tab.classList.remove('active'));
-      document.getElementById(targetId).classList.add('active');
-      
-      document.getElementById('search-section').classList.remove('active');
+      changeTab(targetId);
     });
   });
 
-  const btnCari = document.getElementById('btn-cari');
-  const searchSection = document.getElementById('search-section');
-  const btnProfil = document.getElementById('btn-profil');
-  const btnNotif = document.getElementById('btn-notif');
-
-  btnCari.addEventListener('click', function() {
-    searchSection.classList.toggle('active');
+  document.getElementById('btn-cart-top').addEventListener('click', function() {
+    changeTab('content-cart');
   });
 
-  btnProfil.addEventListener('click', function() {
-    tabs.forEach(tab => tab.classList.remove('active'));
-    document.getElementById('content-profil').classList.add('active');
-    document.querySelector('.nav-item.active').classList.remove('active');
-  });
+  function switchSlide(slideNum) {
+    document.querySelectorAll('.product-page').forEach(page => page.classList.remove('active'));
+    document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
 
-  btnNotif.addEventListener('click', function() {
-    alert('Kotak Masuk: Kamu belum memiliki notifikasi pembaruan chapter baru.');
-  });
+    document.getElementById(`page-${slideNum}`).classList.add('active');
+    document.getElementById(`btn-slide-${slideNum}`).classList.add('active');
+  }
+
+  function addToCart(name, price) {
+    cart.push({ name: name, price: price });
+    updateCartUI();
+    showModal(`"${name}" berhasil ditambahkan ke keranjang!`);
+  }
+
+  function buyNow(name, price) {
+    cart.push({ name: name, price: price });
+    updateCartUI();
+    changeTab('content-cart');
+    const userName = document.getElementById('prof-name').value;
+    showModal(`Kamu memilih Beli Langsung untuk "${name}". Klik tombol Checkout untuk menyelesaikan transaksi atas nama ${userName}.`);
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+  }
+
+  function updateCartUI() {
+    document.getElementById('cart-count').innerText = cart.length;
+
+    const container = document.getElementById('cart-items-container');
+    const totalText = document.getElementById('cart-total-price');
+    
+    if (cart.length === 0) {
+      container.innerHTML = `<p style="color:#777; text-align:center;">Keranjangmu masih kosong. Silakan pilih merch surgawi di menu toko!</p>`;
+      totalText.innerText = "Rp 0";
+      return;
+    }
+
+    let htmlContent = "";
+    let totalPrice = 0;
+
+    cart.forEach((item, index) => {
+      htmlContent += `
+        <div class="cart-item">
+          <div class="cart-item-detail">
+            <span>${item.name}</span>
+            <span style="color:#00b4d8; font-weight:bold;">Rp ${item.price.toLocaleString('id-ID')}</span>
+          </div>
+          <button class="btn-remove" onclick="removeFromCart(${index})">Hapus</button>
+        </div>
+      `;
+      totalPrice += item.price;
+    });
+
+    container.innerHTML = htmlContent;
+    totalText.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+  }
+
+  function saveProfile(event) {
+    event.preventDefault();
+    const name = document.getElementById('prof-name').value;
+    showModal(`Data Profil Pendekar "${name}" berhasil diperbarui!`);
+  }
+
+  function processCheckout() {
+    if(cart.length === 0) {
+      showModal("Keranjang kamu kosong pendekar! Pilih barang dulu.");
+      return;
+    }
+    const name = document.getElementById('prof-name').value;
+    showModal(`Pesanan atas nama ${name} sedang diproses oleh Kurir Surgawi! Terima kasih.`);
+    cart = [];
+    updateCartUI();
+    changeTab('content-shop');
+  }
 </script>
 
 </body>
